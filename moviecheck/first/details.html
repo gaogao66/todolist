@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <style>
+        .row:empty{
+            height:100px;
+            background:hsl(120,100%,50%);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row"></div>
+</div>
+<script>
+    function details(){
+        var id=window.sessionStorage.getItem('movie_id');
+        console.log(id);
+        $.ajax({
+            url:"http://www.omdbapi.com/?apikey=15f82942&i="+id,
+            success:function(data){
+                console.log(data);
+                $(".row").html(`
+                <div class="col-lg-offset-2">
+                    <div class="col-lg-4 "><img src="${data.Poster}" /></div>
+                     <div class="col-lg-4 ">
+                     <h1>${data.Title}</h1>
+                     <h3>${data.Runtime}</h3>
+                     <p>${data.Plot}</p>
+                     </div>
+                </div>
+                 `);
+            },
+            error:function(){
+                $(".row").html(`
+                    <h1>something wrong with page!</h1>`);
+            }
+        });
+    }
+    details();
+</script>
+</body>
+</html>

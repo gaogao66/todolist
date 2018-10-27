@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15f82942</title>
+    <!--引入bootstrap-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group col-lg jumbotron">
+            <form>
+                <input class="form-control col-lg-2" type="text" placeholder="please input the name of movie" />
+                <input class="btn btn-default col-lg btn-block" type="submit" value="submit" />
+            </form>
+        </div>
+        <div class="row" id="content">
+
+        </div>
+    </div>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".btn").click(function(e){
+                e.preventDefault();
+                var name=$(".form-control")[0].value;
+                $.ajax({
+                    url:"http://www.omdbapi.com/?apikey=15f82942&s="+name,
+                    success:function(data){
+                      console.log(data);
+                      let movie=data.Search;
+                      console.log(movie);
+                      if(movie===undefined){
+                          $("#content").css({'background':"hsl(120,100%,50%)",'height':'100px'});
+                      }
+                      let str='';
+                        $.each(movie, function (index, mov) {
+                            str+=`
+                        <div class="col-lg-4 single-movie">
+                          <div class="well text-center">
+                            <img src="${mov.Poster}" class="">
+                            <h5 class="">${mov.Title}</h5>
+                            <a class="btn btn-primary" onclick="moviedetails('${mov.imdbID}')">more details</a>
+                          </div>
+                        </div>
+                        ` ;
+                            // console.log(${mov.imdbID});
+                        });
+                        $("#content").html(str);
+            //           $("#content").html(`<div class="col-lg-4">
+            //     <img src="${data.Poster}" />
+            //     <h2>${data.Title}</h2>
+            // </div>`);
+                    },
+                    error:function(data){
+                    }
+                });
+                // $(".row").load("http://www.omdbapi.com/?apikey=15f82942&t="+name);
+                // $.get("http://www.omdbapi.com/?apikey=15f82942&t="+name,function(data,status){
+                //     console.log(data,status);
+                // });
+            });
+        });
+        function moviedetails(imdb){
+            window.sessionStorage.setItem('movie_id',imdb);
+            window.location="details.html";
+        }
+    </script>
+</body>
+</html>
