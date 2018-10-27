@@ -1,0 +1,62 @@
+* {
+    margin:0px;
+    padding:0px;
+}
+html{
+    width:100%;
+    height:100%;
+}
+body{
+    background-size:100% 100%;
+    /*同时设置背景色和背景*/
+    background: gray url("../image/car.jpg") no-repeat;
+    /*background-attachment: fixed;*/
+    /*设置指针的样式*/
+    cursor:url("../image/zz.jpeg") auto;
+    opacity:0.6;
+    background-position-x: center;
+    background-position-y: center;
+}
+.locate{
+    width:29%;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    cursor:url("../image/zz.jpeg") auto;
+    background:lightgray;
+}
+input{
+    text-align:center;
+    width:300px;
+    line-height:40px;
+    border-radius:20px;
+    border:1px solid darkgray;
+    outline:none;
+}
+.input{
+    float:left;
+}
+h2{
+    text-align:center;
+}
+.locationa{
+    position:fixed;
+    left:0px;
+    top:300px;
+}
+.locationb{
+    position:fixed;
+    top:300px;
+    right:0px;
+}
+.lele{
+    width:60%;
+    height:100%;
+    display:none;
+    overflow:hidden;
+}
+.lele img{
+    width:100%;
+    height:100%;
+}

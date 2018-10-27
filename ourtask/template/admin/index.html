@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html body .page{
+            width:100%;
+        }
+        .content{
+            width:85%;
+            background:lightblue;
+            float:right;
+        }
+        .head{
+            width:15%;
+            height:100%;
+            background:lightblue;
+            float:left;
+        }
+        .box{
+            position:fixed;
+            width:500px;
+            height:300px;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            background:#fff;
+        }
+        .shadow{
+            background:#000;
+            top:0;
+            left:0;
+            position:fixed;
+            width:100%;
+            height:100%;
+            opacity:0.3;
+            filter:alpha(opacity:30);
+        }
+        input {
+            width:500px;
+            line-height:30px;
+            background:transparent;
+        }
+        textarea{
+            width:500px;
+            background:transparent;
+        }
+        .content form{
+            /*position:fixed;*/
+            left:40%;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="head"><% include head/manage.html %></div>
+        <div class="content">
+            <form action="?" method="post">
+                <input type="hidden" />
+                <input type="text" name="title" value="" placeholder="标题"/><br />
+                <textarea type="text" name="content" value="" placeholder="内容"></textarea><br />
+                <input type="text" name="href" value="" placeholder="href"/><br />
+                <input type="text" name="time" value="" placeholder="time" /><br />
+                <input type="text" name="writer" value="" placeholder="writer" /><br />
+                <input type="text" name="count" value="" placeholder="count" /><br />
+                <input type="submit" value="submit" />
+            </form>
+            <table border="1">
+                <thead>
+                    <th   >序号</th>
+                    <th   >标题</th>
+                    <th   >内容</th>
+                    <th   >链接</th>
+                    <th   >责任编辑</th>
+                    <th   >浏览次数</th>
+                    <th   >发表时间</th>
+                    <th   >修改</th>
+                    <th   >添加</th>
+                </thead>
+                <tbody>
+                <% for(var i=0; i<(banners.length); i++) {%>
+                    <tr>
+                        <td   ><%=banners[i].id %></td>
+                        <td   ><%=banners[i].title %></td>
+                        <td   ><%=banners[i].content %></td>
+                        <td   ><%=banners[i].href %></td>
+                        <td   ><%=banners[i].writer %></td>
+                        <td   ><%=(banners[i].count++) %></td>
+                        <td   ><%=banners[i].time %></td>
+                        <td   ><a href="?act=mod&id=<%=banners[i].id %>">修改</a></td>
+                        <td   ><a href="?act=del&id=<%=banners[i].id %>"
+                                  onclick="return confirm('你真的要删除吗')">删除</a></td>
+                    </tr>
+                <%}%>
+                </tbody>
+            </table>
+            <% if(typeof mod_data!='undefined'){%>
+            <div class="shadow"></div>
+            <div class="box">
+                <form action="?" method="post">
+                    <input type="hidden" name="mod_id" value="<%=mod_data.id%>"/>
+                    <input type="text" name="title" value="<%=mod_data.title%>" placeholder="标题"/><br />
+                    <textarea type="text" name="content" placeholder="内容"><%=mod_data.content%></textarea><br />
+                    <input type="text" name="time" value="<%=mod_data.time%>" placeholder="time" /><br />
+                    <input type="text" name="writer" value="<%=mod_data.writer%>" placeholder="writer" /><br />
+                    <input type="submit" value="mod" />
+                    <a src="/admin/index" >取消修改</a>
+                </form>
+            </div>
+            <%}%>
+        </div>
+    </div>
+</body>
+</html>
