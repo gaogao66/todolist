@@ -1,0 +1,26 @@
+<!Doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        #nav{
+            background:orangered;
+        }
+        button{
+            background:orangered;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <button type="button" onclick="window.location.href='index.html'">展览</button>
+    <button type="button" onclick="window.location.href='submit.html'">提交</button>
+    <button type="button" onclick="window.location.href='list.html'">详情</button>
+</div>
+    <div>
+        <h3><%=list.title%></h3>
+        <textarea><%=list.content%></textarea>
+    </div>
+</body>
+</html>
